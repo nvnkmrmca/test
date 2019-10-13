@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Andavar Furniture & Electronics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+              font-family: Arial, Helvetica, sans-serif;
+              background-color: #EEE;
+            }
+            * {
+              box-sizing: border-box;
+            }
+        
+            @media screen and (min-width: 900px) {
+                .holder, .header {
+                    padding: 0px 35px;
+                }
+            }
+        
+            .header{
+                width: 100%;
+                margin: 15px 0px;
+                text-align: center;
+            }
+            .holder{
+                float: left;
+                width: 100%;
+            }
+            /* Add padding to containers */
+            .container {
+                float: left;
+                width: 100%;
+                padding: 16px;
+                background-color: white;
+            }
+        
+            /* Full-width input fields */
+            input[type=text], input[type=password], select, textarea {
+              width: 100%;
+              padding: 15px;
+              margin: 5px 0 22px 0;
+              display: inline-block;
+              border: none;
+              background: #f1f1f1;
+              font-size: 13px;
+            }
+        
+            input[type=text]:focus, input[type=password]:focus, select:focus, textarea:focus {
+              background-color: #ddd;
+              outline: none;
+            }
+        
+            /* Overwrite default styles of hr */
+            hr {
+              border: 1px solid #f1f1f1;
+              margin-bottom: 25px;
+            }
+        
+            /* Set a style for the submit button */
+            .btn {
+              background-color: #4CAF50;
+              color: white;
+              padding: 16px 20px;
+              margin: 8px 0;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              opacity: 0.9;
+            }
+        
+            .btn:hover {
+              opacity: 1;
+            }
+        
+            /* Add a blue text color to links */
+            a {
+              color: dodgerblue;
+            }
+        
+            .link {
+              color: dodgerblue;
+              float: right;
+              cursor: pointer;
+              margin: 0px;
+            }
+            .section_header, .section_content, .section_button{
+                float: left;
+                width: 100%;
+            }
+            .section_header{
+                padding: 10px;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #EEE;
+            }
+            .container h3 {
+                float: left;
+                margin: 0px;
+            }
+            .req {
+                color: #FF0000 !important;
+            }
+            .invalid {
+                border: 1px solid #FF0000 !important;
+            }
+            .hide {
+                display: none;
+            }
+            .editLink{
+                text-decoration: underline;
+                color: dodgerblue;
+                cursor: pointer;
+            }
+
+            /*Table styles*/
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            td, th {
+                border-right: 1px solid #dddddd;
+                border-left: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            th {
+                border: 1px solid #dddddd;
+            }
+            tr:last-child td{
+                border-bottom: 1px solid #dddddd;
+            }
+            tr:nth-child(even) {
+                background-color: #eeeeee;
+            }
+            .action{
+              color: dodgerblue;
+              cursor: pointer;
+              margin-right: 10px;
+            }
+            .action:last-child {
+              margin-right: 0px !important;
+            }
+
+/*spinner*/
+#loaderCnr{
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0.4;;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+    z-index: 1001;
+    top: 43%;
+    left: 43%;
+    position: fixed;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+            /* The Modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal_header{
+    width: 100%;
+    font-weight: bold;
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: relative;
+  top: -10px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.spn_total{
+    float: right;
+}
+.spn_total, .spn_totalAmt{
+    font-weight: bold;
+}
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript">
+
+        // var apiURL = 'http://localhost:50096/api/customer/';
+        var apiURL = "http://localhost:3000/";
+        // var apiURL = 'http://ec2-18-217-188-100.us-east-2.compute.amazonaws.com/api/customer/';
+
+        function isNN(val){
+            return (val != null && val != undefined && val.length > 0);
+        }
+		
+        function viewPayment(id){
+            if(validateLogin() == true){
+            var $div_modal = $('#div_modal');
+            $div_modal.removeClass('hide');
+            $div_modal.find(".section").addClass('hide');
+            var $div_view = $div_modal.find("#div_view");
+            $div_view.removeClass('hide');
+            var $tbody = $div_view.find('table tbody');
+            
+            var customers = JSON.parse(sessionStorage.getItem('af_mgs_customers'));
+            var data = customers.filter((d, i) => { return d._id == id });
+            if(isNN(data)){
+                $div_view.find('.cname').html(data[0].fName + ' ' + data[0].lName);
+            }
+            $tbody.empty();
+            if(isNN(data) && isNN(data[0].payment)){
+                //data = data[0].payment;
+                var total = 0;
+                data[0].payment.map((row, i) => {
+                   var $tr = $('<tr />');
+                   $tr.append($('<td />').html(new Date(row.createdAt).toDateString()));
+                   $tr.append($('<td />').html(row.amount));
+
+                   
+                   var $printRecipt = $("<span />").addClass('editLink').html('Print').bind('click', function(){
+                       // alert('Date: ' + row.createdAt + ', Amount: ' + row.amount);
+                       
+                       var $receiptCnr = $('<div />');
+                       var $receipt = $('#div_Receipt').clone();
+                       $receipt.find('#spn_cno').html(row._id);
+                       $receipt.find('#spn_date').html(new Date().toDateString());
+                       $receipt.find('#spn_cname').html(data[0].fName + ' ' + data[0].lName);
+                       $receipt.find('#spn_caddress').html(data[0].address);
+                       $receipt.find('#spn_cmobileno').html(data[0].mobileNo);
+                       $receipt.find('#spn_cagent').html(data[0].agent);
+                       $receipt.find('#spn_camount').html(row.amount);
+
+                       $receiptCnr.append();
+                       $receiptCnr.append($receipt);
+                       var width = (screen.width - (screen.width/4));
+                       var height = (screen.height - (screen.height/4));
+                       var win = window.open("", "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=" + width + ",height=" + height + ",top="+((screen.height/2) - (height/2) )+",left="+((screen.width/2) - (width/2)));
+                       win.document.head.innerHTML = '<style>' +  $('head style').html() + '</style>';
+                       win.document.body.style.backgroundColor = '#FFFFFF';
+                       win.document.body.innerHTML = $receiptCnr.html();
+                       win.print();
+                   });
+
+                   $tr.append($('<td />').append($printRecipt));
+                   $tbody.append($tr);
+                   total += row.amount;
+               });
+                   var $tr = $('<tr />');
+                   $tr.append($('<td />').append($('<span />').addClass('spn_total').html('Total')));
+                   $tr.append($('<td />').attr('colspan', '2').append($('<span />').addClass('spn_totalAmt').html(total)));
+                   $tbody.append($tr);
+            }else{
+               var $tr = $('<tr />');
+               $tr.append($('<td />').attr('colspan', '3').html('No data found!!!'));
+               $tbody.append($tr);
+            }
+        }
+        }
+
+        function pay(id){
+            if(validateLogin() == true){
+            var $div_modal = $('#div_modal');
+            $div_modal.removeClass('hide');
+            $div_modal.find(".section").addClass('hide');
+            var $div_pay = $div_modal.find("#div_pay");
+            $div_pay.removeClass('hide');
+
+            var customers = JSON.parse(sessionStorage.getItem('af_mgs_customers'));
+            var data = customers.filter((d, i) => { return d.id == id });
+            if(isNN(data)){
+                $div_pay.find('.cname').html(data[0].fName + ' ' + data[0].lName);
+                $div_pay.find('.cmonth').html((new Date().getMonth() + 1) + '/' + new Date().getFullYear());
+            }
+
+            $div_pay.find('#btn_submitPayment').unbind().bind('click', function(){
+                var amount = $div_pay.find('#txt_amount').val();
+                if(isNN(amount)){
+                    if(isNaN(amount)){
+                    alert('Please enter valid amount to pay and try again.');
+                    }else{
+                    showLoader(true);
+					var param = {
+						// customerId: id,
+						amount: amount
+					};
+                    jQuery.ajax({
+                        type: "PUT",
+                        url: apiURL + 'customer/pay/' + id,
+                        crossOrigin: true,
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'PUT',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+                        },
+						data: JSON.stringify(param),
+                        error: function (e) {
+                            showLoader(false);
+                            console.log('error, args:', e);
+                        },
+                        success: function (data) {
+                            showLoader(false);
+                            if(data.status == true){
+                                $('.close').click();
+                                $('#btn_search').click();
+                                alert('Payment success.');
+                            }else{
+                                alert('Payment failed.');
+                            }
+                        }
+                    });
+
+
+                    }
+                }else{
+                    alert('Please enter amount to pay and try again.');
+                }
+            });
+        }
+        }
+
+        function gift(id) {
+            if(validateLogin() == true){
+            var $div_modal = $('#div_modal');
+            $div_modal.removeClass('hide');
+            $div_modal.find(".section").addClass('hide');
+            var $div_gift = $div_modal.find("#div_gift");
+            $div_gift.removeClass('hide');
+
+            var customers = JSON.parse(sessionStorage.getItem('af_mgs_customers'));
+            var data = customers.filter((d, i) => { return d.id == id });
+            if(isNN(data)){
+                $div_gift.find('.cname').html(data[0].fName + ' ' + data[0].lName);
+                $div_gift.find('.cmonth').html((new Date().getMonth() + 1) + '/' + new Date().getFullYear());
+            }
+            $div_gift.find('#btn_submitGift').unbind().bind('click', function(){
+                var modalNo = $div_gift.find('#txt_giftModalNo').val();
+                var name = $div_gift.find('#txt_giftName').val();
+                var amount = $div_gift.find('#txt_giftAmount').val();
+                if(isNN(modalNo) && isNN(name) && isNN(amount)){
+                    if(isNaN(amount)){
+                    alert('Please enter valid gift amount and try again.');
+                    }else{
+                    showLoader(true);
+					var param = {
+						// customerId: id,
+						modelNumber: modalNo,
+						name: name,
+						amount: amount
+					};
+                    jQuery.ajax({
+                        type: "PUT",
+                        url: apiURL + 'customer/gift/' + id,
+                        crossOrigin: true,
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'PUT',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+                        },
+						data: JSON.stringify(param),
+                        error: function (e) {
+                            showLoader(false);
+                            console.log('error, args:', e);
+                        },
+                        success: function (data) {
+                            showLoader(false);
+                            if(data.status == true){
+                                $('.close').click();
+                                $('#btn_search').click();
+                                alert('Gift added successfully.');
+                            }else{
+                                alert('Failed to add gift.');
+                            }
+                        }
+                    });
+
+                    }
+                }else{
+                    alert('Please enter gift modal number, name and amount and try again.');
+                }
+            });
+        }
+        }
+
+        function validateLogin(){
+            var $cContainer = $('#cContainer');
+            var $loginContainer = $('#loginContainer');
+            if(sessionStorage.getItem("afaeLoginStatus") == 'true'){
+                $cContainer.show();
+                $loginContainer.hide();
+                $('#logout').show();
+                return true;
+            }else{
+                $cContainer.hide();
+                $loginContainer.show();
+                $('#logout').hide();
+                return false;
+            }
+        }
+
+        function clearCustomer(){
+            var $cContainer = $('#cContainer');
+            var $div_register = $cContainer.find('#div_register');
+            $div_register.find('#cid').val('0');
+            $div_register.find('#cnumber').val('');
+            $div_register.find('#fname').val('');
+            $div_register.find('#lname').val('');
+            $div_register.find('#mobileno').val('');
+            $div_register.find('#email').val('');
+            $div_register.find('#address').val('');
+            $div_register.find('#agent').val('');
+        }
+			
+        function showLoader(show){
+            if(show){
+                $('#loaderCnr, #loader').show();
+            }else{
+                $('#loaderCnr, #loader').hide();
+            }
+        }
+
+        let cipher = salt => {
+            let textToChars = text => text.split('').map(c => c.charCodeAt(0));
+            let byteHex = n => ("0" + Number(n).toString(16)).substr(-2);
+            let applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code);
+            return text => text.split('')
+            .map(textToChars)
+            .map(applySaltToChar)
+            .map(byteHex)
+            .join('')
+        }
+
+        $(document).ready(function(){
+            //Modal
+            var $modal = $('#div_modal');
+            // Get the <span> element that closes the modal
+            var $closeModal = $modal.find('.close');
+            // When the user clicks on <span> (x), close the modal
+            $closeModal.bind('click', function() {
+                $modal.addClass('hide');
+            });
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == $modal[0]) {
+                    $modal.addClass('hide');
+                }
+            }
+
+            //show/hide sections
+            $('.link').bind('click', function(e){
+                $('.section').slideUp();
+                $('#' + $(this).attr('link')).slideDown();
+                if($(this).attr('link') == 'div_register'){
+                    clearCustomer();
+                }
+            });
+            
+            var $cContainer = $('#cContainer');
+            var $loginContainer = $('#loginContainer');
+            var $div_search = $cContainer.find('#div_search');
+            var $div_register = $cContainer.find('#div_register');
+            validateLogin();
+            
+            $('#logout').bind('click', function(){ 
+                sessionStorage.removeItem("afaeLoginStatus");
+                validateLogin();
+            });
+
+            let myCipher = cipher('Andavar Furniture Secret');
+            $loginContainer.find('#btn_Login').bind('click', function(){ 
+                var un  = $loginContainer.find('#userName').val();
+                var pass = $loginContainer.find('#password').val();
+                if(un.length > 0 && pass.length > 0){
+                    var encPassword = myCipher(pass);
+                    if(un.toLowerCase() == 'andavar' &&  encPassword == '484f484c69181b1a'){
+                        sessionStorage.setItem("afaeLoginStatus", "true");
+                        validateLogin();
+                    }else{
+                        alert('Invalid User Name/Password.');
+                    }
+                }else{
+                    alert('Please fill User Name & Password.');
+                }
+            });
+
+            //search customer
+            $div_search.find('.section_content #btn_search').bind('click', function(){ 
+                if(validateLogin() == true){
+                var searchText = $('#txt_search').val();
+                // if(isNN(searchText) && searchText.length > 2){
+                    showLoader(true);
+					var url = apiURL;
+					if(isNN(searchText) && searchText.length > 0){
+						url += 'customer/search/' + searchText;
+					}else{
+						url += 'customers';
+					}
+                    jQuery.ajax({
+                        type: "GET",
+                        url: url,
+                        crossOrigin: true,
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'GET',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+                        },
+                        data: null,
+                        error: function (e) {
+                            showLoader(false);
+                            console.log('error, args:', e);
+                        },
+                        success: function (data) {
+                            showLoader(false);
+                            // data = data.data;
+                            sessionStorage.setItem('af_mgs_customers', JSON.stringify(data));
+                            var $tbody = $div_search.find('#div_searchResult table tbody');
+                            $tbody.empty();
+                            if(isNN(data)){
+                                data.map((row, i) => {
+                                    var $cNumber = $("<span />").addClass('editLink').html(row.number).bind('click', function(){
+                                        $div_search.find('.link').click();
+                                        $div_register.find('#cid').val(row._id);
+                                        $div_register.find('#cnumber').val(row.number);
+                                        $div_register.find('#fname').val(row.fName);
+                                        $div_register.find('#lname').val(row.lName);
+                                        $div_register.find('#mobileno').val(row.mobileNo);
+                                        $div_register.find('#email').val(row.email);
+                                        $div_register.find('#address').val(row.address);
+                                        $div_register.find('#agent').val(row.agent);
+
+                                    });
+                                    var $tr = $('<tr />');
+                                    $tr.append($('<td />').append($cNumber));
+                                    $tr.append($('<td />').html(row.fName));
+                                    $tr.append($('<td />').html(row.lName));
+                                    $tr.append($('<td />').html(row.mobileNo));
+                                    $tr.append($('<td />').html(row.email));
+                                    $tr.append($('<td />').html(row.agent));
+                                    $tr.append($('<td />').html(row.address));
+                                    var giftData = '';
+                                    if(row.giftName && row.giftName.length > 0){
+                                        giftData = '<div>' + row.giftModelNumber + '</div><div>' + row.giftName + '</div><div>' + row.giftAmount + '</div>';
+                                    }
+                                    $tr.append($('<td />').html(giftData));
+
+                                    var $tdAction = $('<td />');
+                                    $tdAction.append($('<span />').addClass('action').html('View').bind('click', function(){
+                                        viewPayment(row._id);
+                                    }));
+                                    if((!isNN(row.payment) || !isNN(row.payment.filter((d, i) => { return new Date(d.createdAt).getMonth() == new Date().getMonth() }))) && (row.giftName == undefined || row.giftName == null || row.giftName.length < 1)){
+                                        $tdAction.append($('<span />').addClass('action').html('Pay').bind('click', function(){
+                                            pay(row._id);
+                                        }));
+                                    }
+                                    if(row.giftName == undefined || row.giftName == null || row.giftName.length < 1) {
+                                        $tdAction.append($('<span />').addClass('action').html('Gift').bind('click', function(){
+                                            gift(row._id);
+                                        }));
+                                    }
+                                    $tr.append($tdAction);
+                                    /*
+                                    $tr.append($('<td />').append($('<span />').addClass('action').html('View').bind('click', function(){
+                                        viewPayment(row._id);
+                                    })).append($('<span />').addClass('action').html('Pay').bind('click', function(){
+                                        pay(row._id);
+                                    })).append($('<span />').addClass('action').html('Gift').bind('click', function(){
+                                        gift(row._id);
+                                    })));
+                                    */
+                                    $tbody.append($tr);
+                                });
+                            }else{
+                                var $tr = $('<tr />');
+                                $tr.append($('<td />').attr('colspan', '9').html('No data found!!!'));
+                                $tbody.append($tr);
+                            }
+                        }
+                    });
+                // }else{
+                    // alert('Please enter adleast 3 characters to search.');
+                // }
+                }
+            });
+
+            //submit new customer
+            $div_register.find('.section_button #btn_submitCustomer').bind('click', function(){
+                if(validateLogin() == true){
+                $div_register.find('.invalid').removeClass('invalid');
+                var msg = "", fields = "";
+                var cid = $div_register.find('#cid').val();
+                var cnumber = $div_register.find('#cnumber').val();
+                var fname = $div_register.find('#fname').val();
+                var lname = $div_register.find('#lname').val();
+                var mobileno = $div_register.find('#mobileno').val();
+                var email = $div_register.find('#email').val();
+                var address = $div_register.find('#address').val();
+                var agent = $div_register.find('#agent').val();
+                if(!isNN(cnumber)){
+                    msg = "Customer Numer";
+                    fields = "#cnumber";
+                }
+                if(!isNN(fname)){
+                    msg = (msg.length > 0 ? ", " : "") + "First Name";
+                    fields = (fields.length > 0 ? ", " : "") + "#fname";
+                }
+                if(!isNN(lname)){
+                    msg += (msg.length > 0 ? ", " : "") + "Last Name";
+                    fields += (fields.length > 0 ? ", " : "") + "#lname";
+                }
+                if(!isNN(mobileno)){
+                    msg += (msg.length > 0 ? ", " : "") + "Mobile Number";
+                    fields += (fields.length > 0 ? ", " : "") + "#mobileno";
+                }
+                if(!isNN(address)){
+                    msg += (msg.length > 0 ? ", " : "") + "Address";
+                    fields += (fields.length > 0 ? ", " : "") + "#address";
+                }
+                if(!isNN(agent)){
+                    msg += (msg.length > 0 ? ", " : "") + "Agent";
+                    fields += (fields.length > 0 ? ", " : "") + "#agent";
+                }
+                if(isNN(msg)){
+                    $div_register.find(fields).addClass('invalid');
+                    alert('Please fill the following required fields ' + msg);
+                }else{
+                    if(!isNaN(cnumber)) {
+                        if (/^\d{10}$/.test(mobileno)) {
+                            var regEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                            if (email.length < 1 || regEmail.test(email)) {
+                                var param = {
+                                    // id: cid,
+                                    number: cnumber,
+                                    fName: fname,
+                                    lName: lname,
+                                    mobileNo: mobileno,
+                                    email: email,
+                                    agent: agent,
+                                    address: address
+                                };
+								var url = apiURL, type = '';
+								if(cid && cid != '0' && cid.length > 1){
+									url += 'customer/' + cid;
+									type = 'PUT';
+								}else{
+									url += 'customer';
+									type = 'POST';
+								}
+                                showLoader(true);
+                                jQuery.ajax({
+                                    type: type,
+                                    url: url,
+                                    crossOrigin: true, 
+                                    dataType: "JSON",
+                                    contentType: "application/json",
+                                    headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Methods': type,
+                                    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+                                    },
+                                    data: JSON.stringify(param),
+                                    error: function (e) {
+                                        showLoader(false);
+                                        console.log('error, args:', e);
+                                    },
+                                    success: function (data) {
+                                        showLoader(false);
+                                        if(data && data.length > 0){
+                                            clearCustomer();
+                                            $div_register.find('.link').click();
+                                            $div_search.find('#btn_search').click();
+                                            alert('Customer saved successfully.');
+                                        }else{
+                                            alert('Failed to save customer.');
+                                        }
+                                    }
+                                });
+                            } else {
+                                alert("Please enter Valid Email.")
+                            }
+                        } else {
+                            alert("Please enter Valid Mobile Number.")
+                        }
+                    }else{
+                        alert("Please enter Valid Customer Number.")
+                    }
+                }
+            }
+            });
+        });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1 style="margin: 0px;">Andavar Furnitures & Electronics</h1>
+            <h2 style="margin: 0px;">Mega gift scheme</h2>
+            <div style="width: 100%;">
+                <span class="editLink" id="logout" style="float: right;">Logout</span>
+            </div>
+        </div>
+        <div class="holder">
+            <div id="cContainer" class="container" style="display: none;">
+                <div id="div_search" class="section">
+                            <div class="section_header">
+                                <h3>Search Customer</h3>
+                                <span class="link" link="div_register">Add New Customer</span>
+                            </div>
+                            <div class="section_content">
+                                <div style="float: left; width: 100%;">
+                                    <input type="text" id="txt_search" name="search" placeholder="Search.." style="width: calc(100% - 85px); float: left;">
+                                    <button type="submit" id="btn_search" class="btn" style="width: 85px; margin: 5px 0; padding: 15px 20px;">Search</button>
+                                </div>
+                                <div id="div_searchResult" style="float: left; width: 100%;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Mobile No</th>
+                                                <th>Email</th>
+                                                <th>Agent</th>
+                                                <th>Address</th>
+                                                <th>Gift</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="9">No data found!!!</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                </div>
+                <div id="div_register" class="section hide">
+                        <div class="section_header">
+                            <h3>New Customer Registration</h3>
+                            <span class="link" link="div_search">Search Customer</span>
+                        </div>
+                        <div class="section_content">
+                            <input type="hidden" id="cid" name="cid" value="0" />
+                            <label for="cnumber"><b>Customer Number</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter Customer Number" id="cnumber" name="cnumber" required>
+    
+                            <label for="fname"><b>First Name</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter First Name" id="fname" name="fname" required>
+
+                            <label for="lname"><b>Last Name</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter Last Name" id="lname" name="lname">
+
+                            <label for="mobileno"><b>Mobile Number</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter Mobile Number" id="mobileno" name="mobileno" required>
+
+                            <label for="email"><b>Email</b></label>
+                            <input type="text" placeholder="Enter Email" id="email" name="email">
+
+                            <label for="address"><b>Address</b><b class="req"> *</b></label>
+                            <div style="width: 100%;">
+                                <textarea rows="4" placeholder="Enter Address" id="address" name="address" required></textarea>
+                            </div>
+
+                            <label for="agent"><b>Agent</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter Agent Name" id="agent" name="agent">
+
+                        </div>
+                        <div class="section_button">
+                            <button type="submit" id="btn_submitCustomer" class="btn">Register</button>
+                        </div>
+                </div>
+            </div>
+            <div id="loginContainer" class="container" style="display: block;">
+
+                <div class="section_content">
+                    <label for="fname"><b>User Name</b><b class="req"> *</b></label>
+                    <input type="text" placeholder="User Name" id="userName" name="userName" required>
+
+                    <label for="lname"><b>Password</b><b class="req"> *</b></label>
+                    <input type="password" placeholder="Password" id="password" name="password">
+                </div>
+                <div class="section_button">
+                    <button type="submit" id="btn_Login" class="btn">Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Modal -->
+        <div id="div_modal" class="modal hide">
+            <!-- Modal content -->
+            <div class="modal_content">
+                <span class="close">&times;</span>
+                <div id="div_view" class="section hide">
+                    <div class="modal_header">Payments Made by <span class="cname"></span></div>
+                    <div style="width: 100%;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">No data found!!!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div id="div_pay" class="section hide">
+                    <div class="modal_header">Payment by <span class="cname"></span> for the month of <span class="cmonth"></span></div>
+                    <div style="width: 100%; margin-top: 15px;">
+                        <label for="amount"><b>Amount</b><b class="req"> *</b></label>
+                        <input type="text" placeholder="Enter the Amount to pay" id="txt_amount" name="txt_amount" required>
+                        <button type="submit" id="btn_submitPayment" class="btn">Submit</button>
+                    </div>
+                </div>
+                <div id="div_gift" class="section hide">
+                        <div class="modal_header">Gift for <span class="cname"></span> for the month of <span class="cmonth"></span></div>
+                        <div style="width: 100%; margin-top: 15px;">
+                            <label for="amount"><b>Gift Model number</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter the gift modal number" id="txt_giftModalNo" name="txt_giftModalNo" required>
+                            <label for="amount"><b>Gift Name</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter the gift name" id="txt_giftName" name="txt_giftName" required>
+                            <label for="amount"><b>Gift Amount</b><b class="req"> *</b></label>
+                            <input type="text" placeholder="Enter the gift amount" id="txt_giftAmount" name="txt_giftAmount" required>
+                            <button type="submit" id="btn_submitGift" class="btn">Submit</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;">
+            <div id="div_Receipt" style="float: left; width: 100%; border: 1px solid #000000;">
+                <div class="header">
+                    <h1 style="margin: 0px;">Andavar Furnitures & Electronics</h1>
+                    <h2 style="margin: 0px;">Kangayam - Vellakoil - Koduvai</h2>
+                    <h2 style="margin: 0px;">90951 06060, 86100 52757, 99767 96999</h2>
+                    <h1 style="margin: 0px;">Receipt</h1>
+                </div>
+                <div class="holder">
+                    <div class="container" style="font-weight: bold;">
+                        <div style="float: left; width: 100%; margin: 7px 0px;">
+                            <div style="float: left;">
+                                <span>No: </span><span id="spn_cno"></span>
+                            </div>
+                            <div style="float: right;">
+                                <span>Date: </span><span id="spn_date"></span>
+                            </div>
+                        </div>
+
+                        <div style="float: left; width: 100%; margin: 7px 0px;">
+                            <div style="float: left;">
+                                <span style="float: left; width: 100px;">Name</span>
+                                <span style="float: left; width: 10px;">: </span>
+                                <span id="spn_cname"></span>
+                            </div>
+                        </div>
+
+                        <div style="float: left; width: 100%; margin: 7px 0px;">
+                            <div style="float: left;">
+                                <span style="float: left; width: 100px;">Address</span>
+                                <span style="float: left; width: 10px;">: </span>
+                                <span id="spn_caddress"></span>
+                            </div>
+                        </div>
+
+                        <div style="float: left; width: 100%; margin: 7px 0px;">
+                            <div style="float: left;">
+                                <span style="float: left; width: 100px;">Mobile No</span>
+                                <span style="float: left; width: 10px;">: </span>
+                                <span id="spn_cmobileno"></span>
+                            </div>
+                        </div>
+
+                        <div style="float: left; width: 100%; margin: 7px 0px;">
+                            <div style="float: left;">
+                                <span style="float: left; width: 100px;">Agent</span>
+                                <span style="float: left; width: 10px;">: </span>
+                                <span id="spn_cagent"></span>
+                            </div>
+                        </div>
+
+                        <div style="float: left; width: 100%; margin-top: 7px;">
+                            <div style="float: left; font-size: 30px;">
+                                <span>Rs </span><span id="spn_camount"></span>
+                            </div>
+                        </div>
+
+                        <div style="float: left; width: 100%; margin-top: -25px;">
+                            <div style="float: right; width: 100px;">
+                                <span>Sign</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div id="loaderCnr" style="display: none;"></div>
+        <div id="loader" class="loader" style="display: none;"></div>
+    </body>
+</html>
