@@ -1,19 +1,19 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 // var cors = require('cors');
 
 // var path = require('path');
 
 var app = express();
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 // parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(express.urlencoded({ extended: true }))
 
 // parse application/json
-// app.use(bodyParser.json())
-app.use(express.json())
+app.use(bodyParser.json())
+// app.use(express.json())
 
 // allow cross origin
 // app.use(cors({credentials: true, origin: true}));
