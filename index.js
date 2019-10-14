@@ -1,8 +1,8 @@
 const express = require('express');
 // const bodyParser = require('body-parser');
-var cors = require('cors');
+// var cors = require('cors');
 
-var path = require('path');
+// var path = require('path');
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -16,23 +16,23 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // allow cross origin
-app.use(cors({credentials: true, origin: true}));
+// app.use(cors({credentials: true, origin: true}));
 
 // configuring the database
-const dbConfig = require('./config/database.js');
-const mongoose = require('mongoose');
+// const dbConfig = require('./config/database.js');
+// const mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 // connecting to the database
-mongoose.connect(dbConfig.url, {
-	useNewUrlParser: true
-}).then(() => {
-    console.log("Successfully connected to the database");    
-}).catch(err => {
-    console.log('Could not connect to the database. Exiting now...', err);
-    process.exit();
-});
+// mongoose.connect(dbConfig.url, {
+// 	useNewUrlParser: true
+// }).then(() => {
+//     console.log("Successfully connected to the database");    
+// }).catch(err => {
+//     console.log('Could not connect to the database. Exiting now...', err);
+//     process.exit();
+// });
 
 // simple route
 app.get('/', (req, res) => {
@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     // res.sendFile(path.join(__dirname + '/index.html'));
     res.sendFile('index.html', { root: '.' });
 });
-require('./routes')(app);
+// require('./routes')(app);
 
 // listen for requests
 app.listen(port, () => {
