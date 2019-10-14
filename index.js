@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// var cors = require('cors');
+var cors = require('cors');
 
 // var path = require('path');
 
@@ -9,14 +9,12 @@ var port = process.env.PORT || 3000;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(express.urlencoded({ extended: true }))
 
 // parse application/json
 app.use(bodyParser.json())
-// app.use(express.json())
 
 // allow cross origin
-// app.use(cors({credentials: true, origin: true}));
+app.use(cors({credentials: true, origin: true}));
 
 // configuring the database
 // const dbConfig = require('./config/database.js');
@@ -40,7 +38,7 @@ app.get('/', (req, res) => {
     // res.sendFile(path.join(__dirname + '/index.html'));
     res.sendFile('index.html', { root: '.' });
 });
-// require('./routes')(app);
+require('./routes')(app);
 
 // listen for requests
 app.listen(port, () => {
